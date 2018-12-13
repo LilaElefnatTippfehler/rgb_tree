@@ -56,20 +56,24 @@
 #define MASK_B 0x02
 #define MASK_A 0x01
 
+
+//Function prototypes
+void breathRGB();
+void set_PWM(int duty);     //Takes value between 0-255 for dutycycle
 /* global variables */
 int read=0;
 
 /* init function*/
 void setup() {
-  
+
   //Serial.begin(9600);
-  
+
   pinMode(6, OUTPUT); // inhA
   pinMode(7,OUTPUT); // inhB
   pinMode(11,OUTPUT); // A
   pinMode(10,OUTPUT); // B
   pinMode(9,OUTPUT); // C
-  
+
   pinMode(3, OUTPUT); // PWM
 }
 
@@ -82,7 +86,7 @@ void loop() {
 }
 
 void all_leds_on() {
-  
+
   set_leds(G0_B);
   UDELAY(SW_DELAY);
 
@@ -181,7 +185,7 @@ void all_leds_on() {
 }
 
 void cycle_all_leds() {
-  
+
   set_leds(G0_B);
   delay(500);
 
@@ -271,12 +275,42 @@ void cycle_all_leds() {
 
   set_leds(G9_R);
   delay(500);
+}
 
-  set_leds(G10_B);
-  delay(500);
+void breathRGB(){
+  int duty = 0;
+  while(duty<255){
+    for(int i = 0; i<100; i++){
+      set_leds(G0_R);
+      set_leds(G2_R);
+      set_leds(G3_R);
+      set_leds(G4_R);
+      set_leds(G5_R);
+      set_leds(G6_R);
+      set_leds(G7_R);
+      set_leds(G8_R);
+      set_leds(G9_R);
+    }
+    set_PWM(duty);
+    duty++;
+  }
+  while(duty>0){
+    for(int i = 0; i<100; i++){
+      set_leds(G0_R);
+      set_leds(G2_R);
+      set_leds(G3_R);
+      set_leds(G4_R);
+      set_leds(G5_R);
+      set_leds(G6_R);
+      set_leds(G7_R);
+      set_leds(G8_R);
+      set_leds(G9_R);
+    }
+    set_PWM(duty);
+    duty--;
+  }
 
-  set_leds(G10_G);
-  delay(500);
+
 }
 
 void set_leds(int group_color) {
@@ -321,4 +355,10 @@ void set_pins(int pin0, int pin1, int pin2, int pin3, int pin4) {
     digitalWrite(11, pin4);
   else
     PRINT("INVALID INPUT ON PIN 11")
+}
+
+set_PWM(int duty){
+  if(duty <= 255){
+    analogWrite(3, duty);
+  }
 }
