@@ -60,6 +60,12 @@
 //Function prototypes
 void breathRGB();
 void set_PWM(int duty);     //Takes value between 0-255 for dutycycle
+void all_leds_breath(int time);
+void RrunThrough();
+void GrunThrough();
+void BrunThrough();
+void MSbreath(int time);
+void together();
 /* global variables */
 int read=0;
 int groups[10][3];
@@ -123,8 +129,18 @@ void loop() {
   //analogWrite(3, read/4);   //Write PWM Dutycycle
 
 
-  breathRGB();
-  all_leds_on(5000);
+  //breathRGB();
+  //all_leds_on(5000);
+  all_leds_breath(10000);
+  all_leds_breath(10000);
+  all_leds_breath(10000);
+  all_leds_breath(10000);
+
+  RrunThrough();
+  GrunThrough();
+  BrunThrough();
+
+
   //cycle_all_leds();
 }
 
@@ -166,6 +182,59 @@ void cycle_all_leds() {
     for(int j=0; j<3; j++){
       set_leds(groups[i][j]);
       delay(500);
+    }
+  }
+}
+
+void all_leds_breath(int time){
+  long now = millis();
+  long allTime = now + time;
+  long halfTime = time/2;
+  int colors[10];
+  for(int i=0;i<10;i++){
+    colors[i] = random(2);
+  }
+  while(allTime > millis()){
+    if((halfTime+now)>millis()){
+      set_PWM((millis()-now)*255/halfTime);
+    }else{
+      set_PWM(255-((millis()-now-halfTime)*255/halfTime));
+    }
+    for(int j=0;j<10;j++){
+      set_leds(groups[j][colors[j]]);
+    }
+  }
+}
+
+void RrunThrough(){
+  for(int i=0;i<10;i++){
+    set_leds(groups[random(9)][0]);
+    MSbreath(1000);
+  }
+
+}
+void GrunThrough(){
+  for(int i=0;i<10;i++){
+    set_leds(groups[random(9)][1]);
+    MSbreath(1000);
+  }
+}
+void BrunThrough(){
+  for(int i=0;i<10;i++){
+    set_leds(groups[random(9)][2]);
+    MSbreath(1000);
+  }
+}
+
+void MSbreath(int time){
+  long now = millis();
+  long allTime = now + time;
+  long halfTime = time/2;
+  while(allTime > millis()){
+    if((halfTime+now)>millis()){
+      set_PWM((millis()-now)*255/halfTime);
+    }else{
+      set_PWM(255-((millis()-now-halfTime)*255/halfTime));
     }
   }
 }
