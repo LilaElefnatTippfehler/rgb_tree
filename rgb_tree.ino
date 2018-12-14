@@ -122,8 +122,12 @@ void loop() {
   //Serial.println(read/4);
   //analogWrite(3, read/4);   //Write PWM Dutycycle
 
-  //all_leds_on();
+
   breathRGB();
+
+  all_leds_on();
+  delay(3000);
+  cycle_all_leds();
 }
 
 void all_leds_on() {
