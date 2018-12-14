@@ -124,19 +124,33 @@ void loop() {
 
 
   breathRGB();
-
-  all_leds_on();
-  delay(3000);
+  for(int i=0; i<1000; i++){
+    all_leds_on();
+  }
   cycle_all_leds();
 }
 
 void all_leds_on() {
-  for(int i=0; i<10; i++){
-    for(int j=0; j<3; j++){
-      set_leds(groups[i][j]);
-      UDELAY(SW_DELAY);
-    }
-  }
+  set_leds(groups[0][1]);
+  UDELAY(SW_DELAY);
+  set_leds(groups[1][2]);
+  UDELAY(SW_DELAY);
+  set_leds(groups[2][0]);
+  UDELAY(SW_DELAY);
+  set_leds(groups[3][1]);
+  UDELAY(SW_DELAY);
+  set_leds(groups[4][2]);
+  UDELAY(SW_DELAY);
+  set_leds(groups[5][0]);
+  UDELAY(SW_DELAY);
+  set_leds(groups[6][1]);
+  UDELAY(SW_DELAY);
+  set_leds(groups[7][2]);
+  UDELAY(SW_DELAY);
+  set_leds(groups[8][0]);
+  UDELAY(SW_DELAY);
+  set_leds(groups[9][1]);
+  UDELAY(SW_DELAY);
 }
 
 void cycle_all_leds() {
