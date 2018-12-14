@@ -62,10 +62,50 @@ void breathRGB();
 void set_PWM(int duty);     //Takes value between 0-255 for dutycycle
 /* global variables */
 int read=0;
+int groups[10][3];
 
 /* init function*/
 void setup() {
+  //filling groups-Array
+  groups[0][0] = G0_R;
+  groups[0][1] = G0_G;
+  groups[0][2] = G0_B;
 
+  groups[1][0] = G1_R;
+  groups[1][1] = G1_G;
+  groups[1][2] = G1_B;
+
+  groups[2][0] = G2_R;
+  groups[2][1] = G2_G;
+  groups[2][2] = G2_B;
+
+  groups[3][0] = G3_R;
+  groups[3][1] = G3_G;
+  groups[3][2] = G3_B;
+
+  groups[4][0] = G4_R;
+  groups[4][1] = G4_G;
+  groups[4][2] = G4_B;
+
+  groups[5][0] = G5_R;
+  groups[5][1] = G5_G;
+  groups[5][2] = G5_B;
+
+  groups[6][0] = G6_R;
+  groups[6][1] = G6_G;
+  groups[6][2] = G6_B;
+
+  groups[7][0] = G7_R;
+  groups[7][1] = G7_G;
+  groups[7][2] = G7_B;
+
+  groups[8][0] = G8_R;
+  groups[8][1] = G8_G;
+  groups[8][2] = G8_B;
+
+  groups[9][0] = G9_R;
+  groups[9][1] = G9_G;
+  groups[9][2] = G9_B;
   //Serial.begin(9600);
 
   pinMode(6, OUTPUT); // inhA
@@ -78,237 +118,55 @@ void setup() {
 }
 
 void loop() {
-  read = analogRead(3);
+  //read = analogRead(3);     //Read potentiometer
   //Serial.println(read/4);
-  analogWrite(3, read/4);
+  //analogWrite(3, read/4);   //Write PWM Dutycycle
 
-  all_leds_on();
+  //all_leds_on();
+  breathRGB();
 }
 
 void all_leds_on() {
-
-  set_leds(G0_B);
-  UDELAY(SW_DELAY);
-
-  set_leds(G0_G);
-  UDELAY(SW_DELAY);
-
-  set_leds(G0_R);
-  UDELAY(SW_DELAY);
-
-  set_leds(G1_B);
-  UDELAY(SW_DELAY);
-
-  set_leds(G1_G);
-  UDELAY(SW_DELAY);
-
-  set_leds(G1_R);
-  UDELAY(SW_DELAY);
-
-  set_leds(G2_B);
-  UDELAY(SW_DELAY);
-
-  set_leds(G2_G);
-  UDELAY(SW_DELAY);
-
-  set_leds(G2_R);
-  UDELAY(SW_DELAY);
-
-  set_leds(G3_B);
-  UDELAY(SW_DELAY);
-
-  set_leds(G3_G);
-  UDELAY(SW_DELAY);
-
-  set_leds(G3_R);
-  UDELAY(SW_DELAY);
-
-  set_leds(G4_B);
-  UDELAY(SW_DELAY);
-
-  set_leds(G4_G);
-  UDELAY(SW_DELAY);
-
-  set_leds(G4_R);
-  UDELAY(SW_DELAY);
-
-  set_leds(G5_B);
-  UDELAY(SW_DELAY);
-
-  set_leds(G5_G);
-  UDELAY(SW_DELAY);
-
-  set_leds(G5_R);
-  UDELAY(SW_DELAY);
-
-  set_leds(G6_B);
-  UDELAY(SW_DELAY);
-
-  set_leds(G6_G);
-  UDELAY(SW_DELAY);
-
-  set_leds(G6_R);
-  UDELAY(SW_DELAY);
-
-  set_leds(G7_B);
-  UDELAY(SW_DELAY);
-
-  set_leds(G7_G);
-  UDELAY(SW_DELAY);
-
-  set_leds(G7_R);
-  UDELAY(SW_DELAY);
-
-  set_leds(G8_B);
-  UDELAY(SW_DELAY);
-
-  set_leds(G8_G);
-  UDELAY(SW_DELAY);
-
-  set_leds(G8_R);
-  UDELAY(SW_DELAY);
-
-  set_leds(G9_B);
-  UDELAY(SW_DELAY);
-
-  set_leds(G9_G);
-  UDELAY(SW_DELAY);
-
-  set_leds(G9_R);
-  UDELAY(SW_DELAY);
-
-  set_leds(G10_B);
-  UDELAY(SW_DELAY);
-
-  set_leds(G10_G);
-  UDELAY(SW_DELAY);
+  for(int i=0; i<10; i++){
+    for(int j=0; j<3; j++){
+      set_leds(groups[i][j]);
+      UDELAY(SW_DELAY);
+    }
+  }
 }
 
 void cycle_all_leds() {
-
-  set_leds(G0_B);
-  delay(500);
-
-  set_leds(G0_G);
-  delay(500);
-
-  set_leds(G0_R);
-  delay(500);
-
-  set_leds(G1_B);
-  delay(500);
-
-  set_leds(G1_G);
-  delay(500);
-
-  set_leds(G1_R);
-  delay(500);
-
-  set_leds(G2_B);
-  delay(500);
-
-  set_leds(G2_G);
-  delay(500);
-
-  set_leds(G2_R);
-  delay(500);
-
-  set_leds(G3_B);
-  delay(500);
-
-  set_leds(G3_G);
-  delay(500);
-
-  set_leds(G3_R);
-  delay(500);
-
-  set_leds(G4_B);
-  delay(500);
-
-  set_leds(G4_G);
-  delay(500);
-
-  set_leds(G4_R);
-  delay(500);
-
-  set_leds(G5_B);
-  delay(500);
-
-  set_leds(G5_G);
-  delay(500);
-
-  set_leds(G5_R);
-  delay(500);
-
-  set_leds(G6_B);
-  delay(500);
-
-  set_leds(G6_G);
-  delay(500);
-
-  set_leds(G6_R);
-  delay(500);
-
-  set_leds(G7_B);
-  delay(500);
-
-  set_leds(G7_G);
-  delay(500);
-
-  set_leds(G7_R);
-  delay(500);
-
-  set_leds(G8_B);
-  delay(500);
-
-  set_leds(G8_G);
-  delay(500);
-
-  set_leds(G8_R);
-  delay(500);
-
-  set_leds(G9_B);
-  delay(500);
-
-  set_leds(G9_G);
-  delay(500);
-
-  set_leds(G9_R);
-  delay(500);
+  for(int i=0; i<10; i++){
+    for(int j=0; j<3; j++){
+      set_leds(groups[i][j]);
+      delay(500);
+    }
+  }
 }
 
 void breathRGB(){
-  int duty = 0;
-  while(duty<255){
-    for(int i = 0; i<100; i++){
-      set_leds(G0_R);
-      set_leds(G2_R);
-      set_leds(G3_R);
-      set_leds(G4_R);
-      set_leds(G5_R);
-      set_leds(G6_R);
-      set_leds(G7_R);
-      set_leds(G8_R);
-      set_leds(G9_R);
+  int duty;
+  for(int k = 0; k<3; k++){
+    for(int j = 0; j<10 ;j++){
+      duty = 0;
+      while(duty<255){
+        for(int i = 0; i<100; i++){
+          set_leds(groups[j][k]);
+        }
+        set_PWM(duty);
+        duty++;
+      }
+      while(duty>0){
+        for(int i = 0; i<100; i++){
+          set_leds(groups[j][k]);
+        }
+        set_PWM(duty);
+        duty--;
+      }
     }
-    set_PWM(duty);
-    duty++;
   }
-  while(duty>0){
-    for(int i = 0; i<100; i++){
-      set_leds(G0_R);
-      set_leds(G2_R);
-      set_leds(G3_R);
-      set_leds(G4_R);
-      set_leds(G5_R);
-      set_leds(G6_R);
-      set_leds(G7_R);
-      set_leds(G8_R);
-      set_leds(G9_R);
-    }
-    set_PWM(duty);
-    duty--;
-  }
+
+
 
 
 }
@@ -357,7 +215,7 @@ void set_pins(int pin0, int pin1, int pin2, int pin3, int pin4) {
     PRINT("INVALID INPUT ON PIN 11")
 }
 
-set_PWM(int duty){
+void set_PWM(int duty){
   if(duty <= 255){
     analogWrite(3, duty);
   }
