@@ -124,13 +124,20 @@ void loop() {
 
 
   breathRGB();
-  all_leds_on(3000);
+  all_leds_on(5000);
   //cycle_all_leds();
 }
 
 void all_leds_on(int time) {
   long now = millis();
-  while((now + time) > millis()){
+  long allTime = now + time;
+  long halfTime = time/2;
+  while(allTime > millis()){
+    if((halfTime+now)>millis()){
+      set_PWM((millis()-now)*255/halfTime);
+    }else{
+      set_PWM(255-((millis()-now-halfTime)*255/halfTime));
+    }
     set_leds(groups[0][1]);
     //UDELAY(SW_DELAY);
     set_leds(groups[1][2]);
