@@ -124,33 +124,34 @@ void loop() {
 
 
   breathRGB();
-  for(int i=0; i<30000; i++){
-    all_leds_on();
-  }
-  cycle_all_leds();
+  all_leds_on(3000);
+  //cycle_all_leds();
 }
 
-void all_leds_on() {
-  set_leds(groups[0][1]);
-  UDELAY(SW_DELAY);
-  set_leds(groups[1][2]);
-  UDELAY(SW_DELAY);
-  set_leds(groups[2][0]);
-  UDELAY(SW_DELAY);
-  set_leds(groups[3][1]);
-  UDELAY(SW_DELAY);
-  set_leds(groups[4][2]);
-  UDELAY(SW_DELAY);
-  set_leds(groups[5][0]);
-  UDELAY(SW_DELAY);
-  set_leds(groups[6][1]);
-  UDELAY(SW_DELAY);
-  set_leds(groups[7][2]);
-  UDELAY(SW_DELAY);
-  set_leds(groups[8][0]);
-  UDELAY(SW_DELAY);
-  set_leds(groups[9][1]);
-  UDELAY(SW_DELAY);
+void all_leds_on(int time) {
+  long now = millis();
+  while((now + time) > millis()){
+    set_leds(groups[0][1]);
+    //UDELAY(SW_DELAY);
+    set_leds(groups[1][2]);
+    //UDELAY(SW_DELAY);
+    set_leds(groups[2][0]);
+    //UDELAY(SW_DELAY);
+    set_leds(groups[3][1]);
+    //UDELAY(SW_DELAY);
+    set_leds(groups[4][2]);
+    //UDELAY(SW_DELAY);
+    set_leds(groups[5][0]);
+    //UDELAY(SW_DELAY);
+    set_leds(groups[6][1]);
+    //UDELAY(SW_DELAY);
+    set_leds(groups[7][2]);
+    //UDELAY(SW_DELAY);
+    set_leds(groups[8][0]);
+    //UDELAY(SW_DELAY);
+    set_leds(groups[9][1]);
+    //UDELAY(SW_DELAY);
+  }
 }
 
 void cycle_all_leds() {
