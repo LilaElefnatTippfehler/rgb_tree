@@ -124,7 +124,7 @@ void loop() {
 
 
   breathRGB();
-  for(int i=0; i<1000; i++){
+  for(int i=0; i<30000; i++){
     all_leds_on();
   }
   cycle_all_leds();
@@ -183,10 +183,7 @@ void breathRGB(){
       }
     }
   }
-
-
-
-
+  set_PWM(255);
 }
 
 void set_leds(int group_color) {
