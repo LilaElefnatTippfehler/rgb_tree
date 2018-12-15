@@ -65,7 +65,7 @@ void RrunThrough();
 void GrunThrough();
 void BrunThrough();
 void MSbreath(int time);
-void together();
+void together(int time);
 /* global variables */
 int read=0;
 int groups[10][3];
@@ -124,17 +124,21 @@ void setup() {
 }
 
 void loop() {
-  //read = analogRead(3);     //Read potentiometer
+  read = analogRead(3);     //Read potentiometer
   //Serial.println(read/4);
   //analogWrite(3, read/4);   //Write PWM Dutycycle
 
 
   //breathRGB();
   //all_leds_on(5000);
-  all_leds_breath(10000);
-  all_leds_breath(10000);
-  all_leds_breath(10000);
-  all_leds_breath(10000);
+  set_PWM(255);
+  together((int)(500.00*(float)read/255.00));
+  together((int)(500.00*(float)read/255.00));
+
+  all_leds_breath((int)(10000*(float)read/255.00));
+  all_leds_breath((int)(10000*(float)read/255.00));
+  all_leds_breath((int)(10000*(float)read/255.00));
+  all_leds_breath((int)(10000*(float)read/255.00));
 
   RrunThrough();
   GrunThrough();
@@ -237,6 +241,25 @@ void MSbreath(int time){
       set_PWM(255-((millis()-now-halfTime)*255/halfTime));
     }
   }
+}
+
+void together(int time){
+  int colors[20][2];
+  for(int j=0;j<20;j++){
+    colors[j][0] = groups[random(9)][random(2)];
+    colors[j][1] = groups[random(9)][2-colors[j][0]];
+  }
+
+  for(int i=0;i<20;i++){
+    long now = millis();
+    long allTime = now + time;
+    while(allTime > millis()){
+      set_leds(colors[i][0]);
+      set_leds(colors[i][1]);
+
+    }
+  }
+
 }
 
 void breathRGB(){
